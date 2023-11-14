@@ -1,5 +1,5 @@
 ---
-name: User story
+name: Requirement
 about: Submit a new requirement for this project
 title: 'REQUIREMENT Nr. <ID>: <short description>'
 labels: 'status: new issue, type: requirement'
