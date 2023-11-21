@@ -1,2 +1,5 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<h1>Willkommen zum Buchungstrainer</h1>
+<p>
+	Schau die die <a href="https://github.com/titepasile/HauptprojektIDPA">Repository</a> an um mehr zu
+	erfahren.
+</p>
