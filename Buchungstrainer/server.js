@@ -1,7 +1,10 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const express = require("express");
-const { join } = require("path");
+import express from "express";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const app = express();
 
 // Serve static assets from the /public folder
@@ -14,7 +17,7 @@ app.get("/auth_config.json", (req, res) => {
 
 // Serve the index page for all other requests
 app.get("/*", (_, res) => {
-  res.sendFile(join(__dirname, "index.html"));
+  res.sendFile(join(__dirname, "app.html"));
 });
 
 // Listen on port 3000
