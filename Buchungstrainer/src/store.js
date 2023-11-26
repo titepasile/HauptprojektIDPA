@@ -8,9 +8,7 @@ export const error = writable();
 export const tasks = writable([]);
 
 export const user_tasks = derived([tasks, user], ([$tasks, $user]) => {
-  /**
-     * @type {any[]}
-     */
+  
   let logged_in_user_tasks = [];
 
   if ($user && $user.email) {
