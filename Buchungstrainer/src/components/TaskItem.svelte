@@ -1,5 +1,4 @@
 <script>
-
     import { tasks } from "../store.js";
     export let task = {};
   

@@ -3,4 +3,4 @@ const config = {
     clientId: 'dXukmHH1AT7ScVwNyiU0VHZYTZW7mVM9'
 };
 
-export default config; 
+export default config;
