@@ -1,41 +1,42 @@
 <script>
-    let auth0Client = null;
-
-const fetchAuthConfig = () => fetch('###');
-
-const configureClient = async () => {
-    const response = await fetchAuthConfig();
-    const config = await response.json();
+    import auth from '$lib/services/auth'
+    import { isAuthenticated, user } from '$lib/stores/auth'
+    import { onMount } from 'svelte'
   
-    auth0Client = await auth0.createAuth0Client({
-      domain: config.domain,
-      clientId: config.clientId
-    });
-  };
-
-  window.onload = async () => {
-    await configureClient();
-  }
-
-  const login = ()=> {
-
-  }
-
-  const logout = ()=> {
-    
-  }
-</script>
-
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-<body>
-    <div id="title">
-        <h2>Buchungstrainer</h2>
-        <p>Welcome to our page!</p>
-    </div>
-    
-    <div id="buttons">
-        <button id="btn-login" on:click={login}>Log in</button>
-        <button id="btn-logout" on:click={logout}>Log out</button>
-    </div>
-</body>
+    let auth0Client
+  
+    onMount(async () => {
+      auth0Client = await auth.createClient()
+      isAuthenticated.set(await auth0Client.isAuthenticated())
+      user.set(await auth0Client.getUser())
+    })
+  
+    function login() {
+      auth.loginWithPopup(auth0Client)
+    }
+  
+    function logout() {
+      auth.logout(auth0Client)
+    }
+  </script>
+  
+  <h1>Welcome to SvelteKit</h1>
+  <p>
+    Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the
+    documentation
+  </p>
+  
+  {#if $isAuthenticated}
+    <h2>Hey {$user.name}!</h2>
+    {#if $user.picture}
+      <img src={$user.picture} alt={user.name} />
+    {:else}
+      <img
+        src="https://source.unsplash.com/random/400x300"
+        alt="Random from unsplash"
+      />
+    {/if}
+    <button on:click={logout}>Logout</button>
+  {:else}
+    <button on:click={login}>Login</button>
+  {/if}
