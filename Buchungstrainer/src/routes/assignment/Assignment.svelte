@@ -1,5 +1,7 @@
 <script lang="ts">
-	import type { Assignment } from '../../interfaces.ts';
+	import { SvelteComponent } from 'svelte';
+	import type { Assignment, Task } from '../../interfaces.js';
+	import AssignmentTable from './AssignmentTable.svelte';
 
 	function GetData(): Assignment {
 		const testData: Assignment = {
@@ -26,13 +28,14 @@
 	}
 
 	const assignment: Assignment = GetData();
+	const tasks: Task[] = assignment.tasks;
 </script>
 
 <div class="WholeContainer">
 	<div class="PartConainer">
 		<h1>{assignment.title}</h1>
 		<div>{assignment.description}</div>
-		<li>{assignment.tasks}</li>
+		<AssignmentTable tableData={tasks} />
 	</div>
 	<div class="PartConainer">
 		<div>Text</div>
