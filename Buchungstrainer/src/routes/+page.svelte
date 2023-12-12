@@ -27,7 +27,7 @@
   </p>
   
   {#if $isAuthenticated}
-    <h2>Hey {$user.name}!</h2>
+    <h2>Hey {$user.name}!</h2> 
     {#if $user.picture}
       <img src={$user.picture} alt={user.name} />
     {:else}
@@ -40,3 +40,4 @@
   {:else}
     <button on:click={login}>Login</button>
   {/if}
+  
