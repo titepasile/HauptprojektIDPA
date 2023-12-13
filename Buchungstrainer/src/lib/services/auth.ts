@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { isAuthenticated, popupOpen, user } from '$lib/stores/auth'
-import {createAuth0Client} from '@auth0/auth0-spa-js'
+import {Auth0Client, createAuth0Client, type PopupLoginOptions} from '@auth0/auth0-spa-js'
 
 async function createClient() {
   const auth0Client = await createAuth0Client({
@@ -11,7 +10,7 @@ async function createClient() {
   return auth0Client
 }
 
-async function loginWithPopup(client: any, options: any) {
+async function loginWithPopup(client: Auth0Client, options: PopupLoginOptions) {
   popupOpen.set(true)
   try {
     await client.loginWithPopup(options)
@@ -25,7 +24,7 @@ async function loginWithPopup(client: any, options: any) {
   }
 }
 
-function logout(client: any) {
+function logout(client: Auth0Client) {
   return client.logout()
 }
 
