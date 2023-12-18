@@ -5,7 +5,7 @@
 	export let tableData: Task[];
 </script>
 
-<table>
+<table class="AssigmentTable">
 	<thead>
 		<tr>
 			<th>Date</th>
@@ -15,7 +15,7 @@
 	<tbody>
 		{#each Object.values(tableData) as row}
 			<tr>
-				<th>{row.date.toDateString()}</th>
+				<th>{row.date.getDate()}.{row.date.getMonth() + 1}.{row.date.getFullYear()}</th>
 				<th>{row.description}</th>
 			</tr>
 		{/each}
@@ -29,5 +29,9 @@
 		border: 1px solid;
 		border-collapse: collapse;
 		margin: 10px;
+	}
+
+	.AssigmentTable {
+		width: 100%;
 	}
 </style>

@@ -2,6 +2,7 @@
 	import { SvelteComponent } from 'svelte';
 	import type { Assignment, Task } from '../../interfaces.js';
 	import AssignmentTable from './AssignmentTable.svelte';
+	import TaskTable from './TaskTable.svelte';
 
 	function GetData(): Assignment {
 		const testData: Assignment = {
@@ -12,14 +13,26 @@
 				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque tempore, fuga temporibus impeditdolorem atque',
 			tasks: [
 				{
-					date: new Date('2019-01-16'),
+					date: new Date('2019-01-18'),
 					description: 'Es werden Waren im Wert von 500 CHF auf Rechnung eingekauft.',
-					solutions: []
+					solutions: [
+						{
+							debitAccount: 'Warenaufwand',
+							creditAccount: 'VLL',
+							amount: 500
+						}
+					]
 				},
 				{
-					date: new Date('2019-01-16'),
+					date: new Date('2019-02-16'),
 					description: 'Es werden Waren im Wert von 600 CHF auf Rechnung verkauft.',
-					solutions: []
+					solutions: [
+						{
+							debitAccount: 'FLL',
+							creditAccount: 'Warenertrag',
+							amount: 600
+						}
+					]
 				}
 			]
 		};
@@ -29,28 +42,51 @@
 
 	const assignment: Assignment = GetData();
 	const tasks: Task[] = assignment.tasks;
+
+	function HandelSubmit(event: SubmitEvent) {
+		console.log(event);
+	}
 </script>
 
 <div class="WholeContainer">
-	<div class="PartConainer">
-		<h1>{assignment.title}</h1>
-		<div>{assignment.description}</div>
-		<AssignmentTable tableData={tasks} />
+	<div class="PartContainer">
+		<div class="PartContent">
+			<h1>{assignment.title}</h1>
+			<div>{assignment.description}</div>
+			<AssignmentTable tableData={tasks} />
+		</div>
 	</div>
-	<div class="PartConainer">
-		<div>Text</div>
-		<button>done</button>
+	<div class="PartContainer">
+		<div class="PartContent">
+			<div>Text</div>
+			<form on:submit={HandelSubmit}>
+				<TaskTable tableData={tasks} />
+				<input type="submit" value="Fertig" />
+			</form>
+		</div>
 	</div>
 </div>
 
 <style>
+	:global(body) {
+		height: 100vh;
+		margin: 0;
+		padding: 0;
+	}
+
 	.WholeContainer {
 		display: grid;
-		grid-template-columns: 35% auto;
+		grid-template-columns: 40% auto;
+		grid-template-rows: 100vh;
 	}
 
 	.PartContainer {
-		overflow: hidden;
+		height: 100%;
+		overflow: auto;
+	}
+
+	.PartContent {
+		padding: 2rem;
 	}
 
 	@media screen and (max-width: 992px) {
