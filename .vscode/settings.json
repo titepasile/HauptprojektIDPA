@@ -1,0 +1,9 @@
+{
+    "editor.tabSize": 4,
+    "prettier.tabWidth": 4,
+    "prettier.printWidth": 100,
+    "svelte.plugin.svelte.format.config.printWidth": 100,
+    "svelte.plugin.svelte.format.config.svelteSortOrder": "scripts-markup-styles-options",
+    "prettier.trailingComma": "none",
+    "prettier.singleQuote": false
+}
