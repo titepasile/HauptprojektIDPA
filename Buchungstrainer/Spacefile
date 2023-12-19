@@ -1,9 +1,9 @@
 # Spacefile Docs: https://go.deta.dev/docs/spacefile/v0
 v: 0
 micros:
-  - name: Buchungstrainer
-    src: ./
-    engine: svelte-kit
-    primary: true
-    public: true
-    dev: npm run dev
+    - name: Buchungstrainer
+      src: ./
+      engine: svelte-kit
+      primary: true
+      public: true
+      dev: npm start
