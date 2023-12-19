@@ -4,6 +4,7 @@
   import { isAuthenticated, user } from '../lib/stores/auth'
   import { onMount } from 'svelte'
 
+
   let auth0Client: undefined | Auth0Client; 
 
   onMount(async () => {
@@ -48,4 +49,3 @@
     <button on:click={login}>Login</button>
   {/if}
 </body>
-  
