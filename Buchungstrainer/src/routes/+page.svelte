@@ -12,24 +12,29 @@
         isAuthenticated.set(await auth0Client.isAuthenticated());
 
         userResult = await auth0Client.getUser();
-        if (!userResult) {
-            return;
-        }
+
+        // check if user exists
+        if (!userResult) return;
+
         user.set(userResult);
     });
 
     async function login() {
         if (!auth0Client) {
+            console.error("Auth0Client not initialized");
             return;
         }
-        await auth.loginWithPopup(auth0Client, {});
+
+        await auth.loginWithPopup(auth0Client);
     }
 
-    function logout() {
+    async function logout() {
         if (!auth0Client) {
+            console.error("Auth0Client not initialized");
             return;
         }
-        auth.logout(auth0Client);
+
+        await auth.logout(auth0Client);
     }
 </script>
 

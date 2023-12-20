@@ -11,7 +11,7 @@ async function createClient() {
     return auth0Client;
 }
 
-async function loginWithPopup(client: Auth0Client, options: PopupLoginOptions) {
+async function loginWithPopup(client: Auth0Client, options?: PopupLoginOptions) {
     popupOpen.set(true);
     try {
         await client.loginWithPopup(options);
