@@ -7,6 +7,11 @@
     let auth0Client: undefined | Auth0Client;
     let userResult: undefined | User;
 
+    user.subscribe((u) => {
+        console.log("changing userResult to: ", u);
+        userResult = u;
+    });
+
     onMount(async () => {
         auth0Client = await auth.createClient();
         isAuthenticated.set(await auth0Client.isAuthenticated());
