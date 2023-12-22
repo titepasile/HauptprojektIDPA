@@ -5,18 +5,12 @@
     import { onMount } from "svelte";
 
     let auth0Client: undefined | Auth0Client;
-    let userResult: undefined | User;
-
-    user.subscribe((u) => {
-        console.log("changing userResult to: ", u);
-        userResult = u;
-    });
 
     onMount(async () => {
         auth0Client = await auth.createClient();
         isAuthenticated.set(await auth0Client.isAuthenticated());
 
-        userResult = await auth0Client.getUser();
+        const userResult = await auth0Client.getUser();
 
         // check if user exists
         if (!userResult) return;
@@ -49,10 +43,10 @@
         Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation
     </p>
 
-    {#if $isAuthenticated}
-        <h2>Hey {userResult?.name}!</h2>
-        {#if userResult?.picture}
-            <img src={userResult?.picture} alt={userResult?.name} />
+    {#if $isAuthenticated && $user}
+        <h2>Hey {$user.name}!</h2>
+        {#if $user.picture}
+            <img src={$user.picture} alt={$user.name} />
         {:else}
             <img src="https://source.unsplash.com/random/400x300" alt="Random from unsplash" />
         {/if}
