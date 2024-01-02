@@ -1,6 +1,6 @@
 <script lang="ts">
     import auth from "$lib/services/auth";
-    import type { Auth0Client, User } from "@auth0/auth0-spa-js";
+    import type { Auth0Client } from "@auth0/auth0-spa-js";
     import { isAuthenticated, user } from "../lib/stores/auth";
     import { onMount } from "svelte";
 
