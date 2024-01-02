@@ -7,7 +7,7 @@ export interface Assignment {
 }
 
 export interface Task {
-    date: Date;
+    date: number;
     description: string;
     solutions: BookingEntry[];
 }
@@ -15,15 +15,5 @@ export interface Task {
 export interface BookingEntry {
     debitAccount: string;
     creditAccount: string;
-    amount: number;
-}
-
-export interface RequestAnswers {
-    id: string;
-    answers: Answer[];
-}
-
-export interface Answer {
-    id: string;
-    answers: string[];
+    amount: string;
 }
