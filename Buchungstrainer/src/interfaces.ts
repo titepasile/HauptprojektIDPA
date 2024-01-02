@@ -1,5 +1,6 @@
 export interface Assignment {
-    id: string;
+    // "id" will not work due to the DB
+    key: string;
     authorId: string;
     title: string;
     description: string;

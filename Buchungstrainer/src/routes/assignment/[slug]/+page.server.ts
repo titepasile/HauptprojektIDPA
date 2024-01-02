@@ -1,13 +1,13 @@
 import type { Assignment } from "$interfaces";
-import type { PageServerLoad } from './$types';
+import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({ params }) => {
-	// fetch data from db here
+    // fetch data from db here
     // ...
 
     // mock data
     const testData: Assignment = {
-        id: params.slug,
+        key: params.slug,
         authorId: "1",
         title: "TestData",
         description:
