@@ -1,7 +1,8 @@
 import type { Assignment } from "$interfaces";
+import type { PageServerLoad } from './$types';
 
-export async function load({ params }) {
-    // fetch data from db here
+export const load: PageServerLoad = async ({ params }) => {
+	// fetch data from db here
     // ...
 
     // mock data
@@ -36,6 +37,7 @@ export async function load({ params }) {
             }
         ]
     };
-
-    return testData;
-}
+    return {
+        assignment: testData
+    };
+};
