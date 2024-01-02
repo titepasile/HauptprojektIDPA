@@ -1,46 +1,28 @@
 <script lang="ts">
-	import { SvelteComponent } from 'svelte';
 	import type { Assignment, Task } from '../../interfaces.js';
 	import AssignmentTable from './AssignmentTable.svelte';
 	import TaskTable from './TaskTable.svelte';
 
-	function GetData(): Assignment {
-		const testData: Assignment = {
-			id: '1',
-			authorId: '1',
-			title: 'TestData',
-			description:
-				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque tempore, fuga temporibus impeditdolorem atque',
-			tasks: [
-				{
-					date: new Date('2019-01-18'),
-					description: 'Es werden Waren im Wert von 500 CHF auf Rechnung eingekauft.',
-					solutions: [
-						{
-							debitAccount: 'Warenaufwand',
-							creditAccount: 'VLL',
-							amount: 500
-						}
-					]
-				},
-				{
-					date: new Date('2019-02-16'),
-					description: 'Es werden Waren im Wert von 600 CHF auf Rechnung verkauft.',
-					solutions: [
-						{
-							debitAccount: 'FLL',
-							creditAccount: 'Warenertrag',
-							amount: 600
-						}
-					]
-				}
-			]
-		};
-
-		return testData;
-	}
-
-	const assignment: Assignment = GetData();
+	const now: Date = new Date();
+	const assignment: Assignment = {
+		id: '1',
+		title: 'Test',
+		description: 'Test',
+		authorId: '1',
+		tasks: [
+			{
+				date: new Date(),
+				description: 'Test',
+				solutions: [
+					{
+						debitAccount: 'Test',
+						creditAccount: 'Test',
+						amount: 1
+					}
+				]
+			}
+		]
+	};
 	const tasks: Task[] = assignment.tasks;
 
 	function HandelSubmit(event: SubmitEvent) {
@@ -59,7 +41,7 @@
 	<div class="PartContainer">
 		<div class="PartContent">
 			<div>Text</div>
-			<form on:submit={HandelSubmit}>
+			<form method="post" action="/checkAnswers">
 				<TaskTable tableData={tasks} />
 				<input type="submit" value="Fertig" />
 			</form>

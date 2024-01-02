@@ -17,3 +17,13 @@ export interface BookingEntry {
     creditAccount: string;
     amount: number;
 }
+
+export interface RequestAnswers {
+    id: string;
+    answers: Answer[];
+}
+
+export interface Answer {
+    id: string;
+    answers: string[];
+}

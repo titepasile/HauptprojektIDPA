@@ -16,7 +16,7 @@
 		{#each Object.values(tableData) as singleAssigment}
 			{#each singleAssigment.solutions as row}
 				<tr>
-					<th><input class="TaskInput" /></th>
+					<th><input class="TaskInput" type="date" /></th>
 					<th><input class="TaskInput" /></th>
 					<th><input class="TaskInput" /></th>
 					<th><input class="TaskInput" type="number" /></th>
