@@ -11,18 +11,29 @@
         isAuthenticated.set(await auth0Client.isAuthenticated());
 
         const userResult = await auth0Client.getUser();
-        if (!userResult) {
-            return;
-        }
+
+        // check if user exists
+        if (!userResult) return;
+
         user.set(userResult);
     });
 
     async function login() {
-        await auth.loginWithPopup(auth0Client, {});
+        if (!auth0Client) {
+            console.error("Auth0Client not initialized");
+            return;
+        }
+
+        await auth.loginWithPopup(auth0Client);
     }
 
-    function logout() {
-        auth.logout(auth0Client);
+    async function logout() {
+        if (!auth0Client) {
+            console.error("Auth0Client not initialized");
+            return;
+        }
+
+        await auth.logout(auth0Client);
     }
 </script>
 
@@ -32,10 +43,10 @@
         Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation
     </p>
 
-    {#if $isAuthenticated}
+    {#if $isAuthenticated && $user}
         <h2>Hey {$user.name}!</h2>
         {#if $user.picture}
-            <img src={$user.picture} alt={user.name} />
+            <img src={$user.picture} alt={$user.name} />
         {:else}
             <img src="https://source.unsplash.com/random/400x300" alt="Random from unsplash" />
         {/if}

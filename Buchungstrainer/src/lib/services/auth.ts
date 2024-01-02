@@ -1,16 +1,17 @@
+import { PUBLIC_DOMAIN, PUBLIC_AUTH0_CLIENT_ID } from "$env/static/public";
 import { isAuthenticated, popupOpen, user } from "$lib/stores/auth";
 import { Auth0Client, createAuth0Client, type PopupLoginOptions } from "@auth0/auth0-spa-js";
 
 async function createClient() {
     const auth0Client = await createAuth0Client({
-        domain: process.env.DOMAIN || "",
-        clientId: process.env.AUTH0_CLIENT_ID || ""
+        domain: PUBLIC_DOMAIN || "",
+        clientId: PUBLIC_AUTH0_CLIENT_ID || ""
     });
 
     return auth0Client;
 }
 
-async function loginWithPopup(client: Auth0Client, options: PopupLoginOptions) {
+async function loginWithPopup(client: Auth0Client, options?: PopupLoginOptions) {
     popupOpen.set(true);
     try {
         await client.loginWithPopup(options);
