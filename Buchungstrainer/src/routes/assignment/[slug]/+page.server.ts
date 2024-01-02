@@ -1,8 +1,12 @@
-import type { Assignment } from "../../interfaces";
+import type { Assignment } from "$interfaces";
 
-export function getAssignments(id: string): Assignment {
+export async function load({ params }) {
+    // fetch data from db here
+    // ...
+
+    // mock data
     const testData: Assignment = {
-        id: id,
+        id: params.slug,
         authorId: "1",
         title: "TestData",
         description:

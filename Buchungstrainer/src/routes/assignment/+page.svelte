@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Assignment, Task } from "../../interfaces.js";
+    import type { Assignment, Task } from "$interfaces";
     import AssignmentTable from "./AssignmentTable.svelte";
     import TaskTable from "./TaskTable.svelte";
 

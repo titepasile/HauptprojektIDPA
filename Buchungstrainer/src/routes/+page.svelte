@@ -51,6 +51,7 @@
             <img src="https://source.unsplash.com/random/400x300" alt="Random from unsplash" />
         {/if}
         <button on:click={logout}>Logout</button>
+        <a href="/assignment">Assignment Page</a>
     {:else}
         <button on:click={login}>Login</button>
     {/if}

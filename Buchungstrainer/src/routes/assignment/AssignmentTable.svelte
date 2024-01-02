@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Task } from "../../interfaces.js";
+    import type { Task } from "$interfaces";
 
     export let tableData: Task[];
 </script>
