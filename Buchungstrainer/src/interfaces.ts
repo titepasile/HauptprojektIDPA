@@ -7,7 +7,7 @@ export interface Assignment {
 }
 
 export interface Task {
-    date: number;
+    date: Date;
     description: string;
     solutions: BookingEntry[];
 }
