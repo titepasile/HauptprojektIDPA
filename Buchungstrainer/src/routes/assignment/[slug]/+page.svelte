@@ -8,7 +8,7 @@
     console.log(data);
 
     let assignment: Assignment = {
-        id: "1",
+        key: "1",
         title: "Test",
         description: "Test",
         authorId: "1",

@@ -1,5 +1,6 @@
 export interface Assignment {
-    id: string;
+    // "id" will not work due to the DB
+    key: string;
     authorId: string;
     title: string;
     description: string;
@@ -15,15 +16,5 @@ export interface Task {
 export interface BookingEntry {
     debitAccount: string;
     creditAccount: string;
-    amount: number;
-}
-
-export interface RequestAnswers {
-    id: string;
-    answers: Answer[];
-}
-
-export interface Answer {
-    id: string;
-    answers: string[];
+    amount: string;
 }
