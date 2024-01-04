@@ -1,55 +1,41 @@
 <script lang="ts">
-    import type { Assignment, Task } from "$interfaces";
+    import type { Assignment } from "$interfaces";
     import AssignmentTable from "./AssignmentTable.svelte";
     import TaskTable from "./TaskTable.svelte";
     import type { PageData } from "./$types";
 
+    // Load data from the server
     export let data: PageData;
-    console.log(data);
+    let assignment: Assignment;
 
-    let assignment: Assignment = {
-        key: "1",
-        title: "Test",
-        description: "Test",
-        authorId: "1",
-        tasks: [
-            {
-                date: new Date(),
-                description: "Test",
-                solutions: [
-                    {
-                        debitAccount: "Test",
-                        creditAccount: "Test",
-                        amount: 1
-                    }
-                ]
-            }
-        ]
-    };
+    if (!data.assignment) {
+        throw new Error("No assignment found");
+    }
 
     assignment = data.assignment;
-
-    const tasks: Task[] = assignment.tasks;
 </script>
 
-<div class="WholeContainer">
-    <div class="PartContainer">
-        <div class="PartContent">
-            <h1>{assignment.title}</h1>
-            <div>{assignment.description}</div>
-            <AssignmentTable tableData={tasks} />
+{#if !assignment}
+    <h1>Keine Aufgabe gefunden</h1>
+{:else}
+    <div class="WholeContainer">
+        <div class="PartContainer">
+            <div class="PartContent">
+                <h1>{assignment.title}</h1>
+                <div>{assignment.description}</div>
+                <AssignmentTable tableData={assignment.tasks} />
+            </div>
+        </div>
+        <div class="PartContainer">
+            <div class="PartContent">
+                <form action="?/checkAsnwers" method="post">
+                    <TaskTable tableData={assignment.tasks} />
+                    <button>Fertig</button>
+                </form>
+            </div>
         </div>
     </div>
-    <div class="PartContainer">
-        <div class="PartContent">
-            <div>Text</div>
-            <form method="post" action="/checkAnswers">
-                <TaskTable tableData={tasks} />
-                <input type="submit" value="Fertig" />
-            </form>
-        </div>
-    </div>
-</div>
+{/if}
 
 <style>
     :global(body) {

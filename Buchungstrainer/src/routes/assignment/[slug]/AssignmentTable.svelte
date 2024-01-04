@@ -7,8 +7,8 @@
 <table class="AssigmentTable">
     <thead>
         <tr>
-            <th>Date</th>
-            <th>Description</th>
+            <th>Datum</th>
+            <th>Beschreibung</th>
         </tr>
     </thead>
     <tbody>

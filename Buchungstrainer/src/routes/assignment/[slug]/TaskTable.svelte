@@ -6,20 +6,43 @@
 <table class="TaksTable">
     <thead>
         <tr>
-            <th>Date</th>
+            <th>Datum</th>
             <th>Soll</th>
             <th>Haben</th>
             <th>Betrag</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="tableContent">
         {#each Object.values(tableData) as singleAssigment}
-            {#each singleAssigment.solutions as row}
+            {#each singleAssigment.solutions as solution, index}
                 <tr>
-                    <th><input id={row.toString()} class="TaskInput" type="date" /></th>
-                    <th><input id={row.toString()} class="TaskInput" /></th>
-                    <th><input id={row.toString()} class="TaskInput" /></th>
-                    <th><input id={row.toString()} class="TaskInput" type="number" /></th>
+                    <th>
+                        <input name="date" id={`date${index}`} class="TaskInput" type="date" />
+                    </th>
+                    <th>
+                        <input
+                            name="debitAccount"
+                            id={`debitAccount_${index}`}
+                            class="TaskInput"
+                            type="text"
+                        />
+                    </th>
+                    <th>
+                        <input
+                            name="creditAccount"
+                            id={`creditAccount_${index}`}
+                            class="TaskInput"
+                            type="text"
+                        />
+                    </th>
+                    <th>
+                        <input
+                            name="amount"
+                            id={`number_${index}`}
+                            class="TaskInput"
+                            type="number"
+                        />
+                    </th>
                 </tr>
             {/each}
         {/each}

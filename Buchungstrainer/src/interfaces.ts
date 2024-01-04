@@ -18,3 +18,16 @@ export interface BookingEntry {
     creditAccount: string;
     amount: string;
 }
+
+export interface BookingEntryAnswer {
+    date: Date;
+    debitAccount: string;
+    creditAccount: string;
+    amount: string;
+}
+
+export interface CorrectedBookingEntry {
+    taskIndex: number;
+    mistakeAmount: number;
+    submitedEntry: BookingEntryAnswer;
+}
