@@ -1,8 +1,8 @@
 import type { Task, BookingEntryAnswer, CorrectedBookingEntry } from "$interfaces";
 import type { PageServerLoad, Actions } from "$types";
-import { getAssignmentByKey } from "$lib/database/getAssignmentByKey";
+import getAssignmentByKey from "$lib/database/getAssignmentByKey";
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params  }) => {
     const assignment = await getAssignmentByKey(params.slug);
     if (!assignment) {
         throw new Error("No assignment found");
