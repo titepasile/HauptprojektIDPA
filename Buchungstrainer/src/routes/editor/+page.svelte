@@ -38,7 +38,6 @@
     const submitAssignment = async (event: { currentTarget: EventTarget & HTMLFormElement }) => {
         const data = new FormData();
         data.append("newAssignment", JSON.stringify(newAssignment));
-        console.log(data);
 
         const response = await fetch(event.currentTarget.action, {
             method: "POST",
@@ -47,16 +46,21 @@
     };
 </script>
 
-<div>
+<div class="container">
     <h1>Neuer Auftrag</h1>
-    <form method="POST" action="?/createAssignment" on:submit|preventDefault={submitAssignment}>
-        <label>
+    <form
+        class="form"
+        method="POST"
+        action="?/createAssignment"
+        on:submit|preventDefault={submitAssignment}
+    >
+        <label class="titleLabel">
             <span>Titel</span>
             <input class="titleInput" type="text" bind:value={newAssignment.title} />
         </label>
-        <label>
+        <label class="titleLabel">
             <span>Beschreibung</span>
-            <textarea bind:value={newAssignment.description} />
+            <textarea class="titleInput" bind:value={newAssignment.description} />
         </label>
         {#each newAssignment.tasks as newTask, index}
             <TaskInput taskIndex={index} taskValues={newTask} deleteTask={deleteInput} />
@@ -67,4 +71,36 @@
 </div>
 
 <style>
+    :global(body) {
+        width: 100vw;
+        min-height: 100vh;
+
+        overflow-x: hidden;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .titleLabel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        width: 100%;
+    }
+
+    .titleInput {
+        max-width: 300px;
+        width: 100%;
+    }
 </style>

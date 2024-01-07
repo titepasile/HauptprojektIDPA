@@ -24,25 +24,48 @@
     };
 </script>
 
-<div>
+<div class="container">
     <button on:click={() => deleteTask(taskIndex)} type="button">X</button>
-    <label>
+    <label class="TaskLabel">
         <span>Datum</span>
         <input class="TaskInput" type="date" bind:value={taskValues.date} />
     </label>
-    <label>
+    <label class="TaskLabel">
         <span>Beschreibung</span>
-        <textarea bind:value={taskValues.description} />
+        <textarea class="TaskInput" bind:value={taskValues.description} />
     </label>
-    {#each taskValues.solutions as solution, index}
-        <SolutionInput
-            solutionIndex={index}
-            handleDeleteSolution={deleteSolution}
-            solutionValues={solution}
-        />
-    {/each}
+    <div>
+        {#each taskValues.solutions as solution, index}
+            <SolutionInput
+                solutionIndex={index}
+                handleDeleteSolution={deleteSolution}
+                solutionValues={solution}
+            />
+        {/each}
+    </div>
     <button on:click={() => addNewSolution()} type="button">Neuer Buchungssatz</button>
 </div>
 
 <style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        margin: 1rem auto;
+        padding: 2rem;
+    }
+
+    .TaskLabel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        width: 100%;
+    }
+
+    .TaskInput {
+        max-width: 300px;
+        width: 100%;
+    }
 </style>
