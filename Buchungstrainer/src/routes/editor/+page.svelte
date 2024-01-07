@@ -67,24 +67,4 @@
 </div>
 
 <style>
-    :global(body) {
-        margin: 0;
-        padding: 0;
-    }
-
-    .FormContainer {
-        display: flex;
-        flex-direction: column;
-        margin: 0.9rem;
-    }
-
-    .titleInput {
-        margin: 0.45rem 0;
-        width: 20rem;
-    }
-
-    .Button {
-        margin: 0.45rem 0;
-        max-width: fit-content;
-    }
 </style>

@@ -17,8 +17,4 @@
 </div>
 
 <style>
-    .container {
-        margin: 0.9rem 0;
-        padding: 0;
-    }
 </style>
