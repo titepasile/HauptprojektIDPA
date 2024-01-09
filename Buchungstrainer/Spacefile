@@ -7,10 +7,11 @@ micros:
       primary: true
       public: true
       dev: npm run dev
-      env:
-          - name: PUBLIC_DOMAIN
-            description: Domain for Auth0
-            default: ""
-          - name: PUBLIC_AUTH0_CLIENT_ID
-            description: Client ID for Auth0
-            default: ""
+      presets:
+          env:
+              - name: PUBLIC_DOMAIN
+                description: Domain for Auth0
+                default: ""
+              - name: PUBLIC_AUTH0_CLIENT_ID
+                description: Client ID for Auth0
+                default: ""
