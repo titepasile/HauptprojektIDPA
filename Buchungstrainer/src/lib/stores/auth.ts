@@ -3,9 +3,25 @@ import { browser } from '$app/environment';
 import { writable } from "svelte/store";
 
 // from here: https://rodneylab.com/using-local-storage-sveltekit/
-const initialIsAuthenticated = browser ? JSON.parse(sessionStorage.getItem("isAuthenticated") ?? "false") : false;
-const initialUser = browser ? JSON.parse(sessionStorage.getItem("user") ?? "undefined") : undefined;
-const initialPopupOpen = browser ? JSON.parse(sessionStorage.getItem("popupOpen") ?? "false") : false;
+let initialIsAuthenticated = false;
+let initialUser: User | undefined;
+let initialPopupOpen = false;
+
+if (browser) {
+    const isAuthenticatedData = sessionStorage.getItem("isAuthenticated");
+    initialIsAuthenticated = isAuthenticatedData ? JSON.parse(isAuthenticatedData) : false;
+  
+    try {
+        const userData = sessionStorage.getItem("user");
+        initialUser = userData ? JSON.parse(userData) : undefined;
+    }
+    catch (error) {
+        console.log(error);
+    }
+  
+    const popupOpenData = sessionStorage.getItem("popupOpen");
+    initialPopupOpen = popupOpenData ? JSON.parse(popupOpenData) : false;
+}
 
 export const isAuthenticated = writable<boolean>(initialIsAuthenticated);
 export const user = writable<User | undefined>(initialUser);
