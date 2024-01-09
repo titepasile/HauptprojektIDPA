@@ -3,12 +3,6 @@
     import TaskInput from "./taskInput.svelte";
     import type { PageData } from "./$types";
 
-    import { invalidateAll } from "$app/navigation";
-    import { applyAction, deserialize } from "$app/forms";
-
-    import type { ActionData } from "./$types";
-    import type { ActionResult } from "@sveltejs/kit";
-
     // Load data from the server
     export let data: PageData;
     let newAssignment: Assignment;
@@ -39,6 +33,8 @@
         const data = new FormData();
         data.append("newAssignment", JSON.stringify(newAssignment));
 
+        // ...
+        // eslint-disable-next-line
         const response = await fetch(event.currentTarget.action, {
             method: "POST",
             body: data

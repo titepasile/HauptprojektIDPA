@@ -1,7 +1,6 @@
 <script lang="ts">
     import type { Task } from "$interfaces";
     import SolutionInput from "./solutionInput.svelte";
-    import { onDestroy } from "svelte";
 
     export let taskIndex: number;
     export let taskValues: Task;

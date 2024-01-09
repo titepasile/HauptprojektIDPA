@@ -2,7 +2,7 @@ import type { Task, BookingEntryAnswer, CorrectedBookingEntry } from "$interface
 import type { PageServerLoad, Actions } from "./$types";
 import getAssignmentByKey from "$lib/database/getAssignmentByKey";
 
-export const load: PageServerLoad = async ({ params  }) => {
+export const load: PageServerLoad = async ({ params }) => {
     const assignment = await getAssignmentByKey(params.slug);
     if (!assignment) {
         throw new Error("No assignment found");
@@ -17,7 +17,6 @@ export const load: PageServerLoad = async ({ params  }) => {
 
 export const actions = {
     checkAsnwers: async ({ request, params }) => {
-        
         const assignment = await getAssignmentByKey(params.slug);
         if (!assignment) {
             throw new Error("No assignment found");
@@ -28,11 +27,10 @@ export const actions = {
             throw new Error("Assignment has no solutions");
         }
 
-
         // formating solutions
         const bookingEntrySolutions: BookingEntryAnswer[] = [];
-        assignmentTasks.forEach(task => {
-            task.solutions.forEach(solution => {
+        assignmentTasks.forEach((task) => {
+            task.solutions.forEach((solution) => {
                 bookingEntrySolutions.push({
                     date: task.date,
                     debitAccount: solution.debitAccount,
@@ -60,41 +58,44 @@ export const actions = {
             });
         });
 
-        // Check if answers are correct        
+        // Check if answers are correct
         const correctionBookingEntry: CorrectedBookingEntry[] = [];
-        
+
         bookingEntrySolutions.forEach((solution, index) => {
             let currentMistakeAmount = 0;
             const submittedEntry = bookingEntryAnswers[index];
-        
-            if (!submittedEntry || !submittedEntry.date || solution.date.getTime() !== submittedEntry.date.getTime()) {
+
+            if (
+                !submittedEntry ||
+                !submittedEntry.date ||
+                solution.date.getTime() !== submittedEntry.date.getTime()
+            ) {
                 currentMistakeAmount++;
             }
-        
+
             if (solution.debitAccount !== submittedEntry?.debitAccount) {
                 currentMistakeAmount++;
             }
-        
+
             if (solution.creditAccount !== submittedEntry?.creditAccount) {
                 currentMistakeAmount++;
             }
-        
+
             if (solution.amount !== submittedEntry?.amount) {
                 currentMistakeAmount++;
             }
-        
+
             correctionBookingEntry.push({
                 taskIndex: index,
                 mistakeAmount: currentMistakeAmount,
-                submitedEntry: submittedEntry,
+                submitedEntry: submittedEntry
             });
         });
-        
 
         console.log(correctionBookingEntry);
         return {
             success: true,
             correctedBookingEntry: correctionBookingEntry
-        }
+        };
     }
 } satisfies Actions;

@@ -13,16 +13,22 @@
         </tr>
     </thead>
     <tbody id="tableContent">
-        {#each Object.values(tableData) as singleAssigment}
-            {#each singleAssigment.solutions as solution, index}
+        {#each Object.values(tableData) as task, index1}
+            {#each // eslint-disable-next-line
+            task.solutions as solution, index2}
                 <tr>
                     <th>
-                        <input name="date" id={`date${index}`} class="TaskInput" type="date" />
+                        <input
+                            name="date"
+                            id={`date${index1}.${index2}`}
+                            class="TaskInput"
+                            type="date"
+                        />
                     </th>
                     <th>
                         <input
                             name="debitAccount"
-                            id={`debitAccount_${index}`}
+                            id={`debitAccount${index1}.${index2}`}
                             class="TaskInput"
                             type="text"
                         />
@@ -30,7 +36,7 @@
                     <th>
                         <input
                             name="creditAccount"
-                            id={`creditAccount_${index}`}
+                            id={`creditAccount${index1}.${index2}`}
                             class="TaskInput"
                             type="text"
                         />
@@ -38,7 +44,7 @@
                     <th>
                         <input
                             name="amount"
-                            id={`number_${index}`}
+                            id={`number${index1}.${index2}`}
                             class="TaskInput"
                             type="number"
                         />

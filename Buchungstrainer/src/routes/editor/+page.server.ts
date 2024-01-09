@@ -6,15 +6,19 @@ export const load: PageServerLoad = async () => {
         authorId: "",
         title: "",
         description: "",
-        tasks: [{
-            date: new Date(),
-            description: "",
-            solutions:[{
-                debitAccount: "",
-                creditAccount: "",
-                amount: ""
-            }]
-        }]
+        tasks: [
+            {
+                date: new Date(),
+                description: "",
+                solutions: [
+                    {
+                        debitAccount: "",
+                        creditAccount: "",
+                        amount: ""
+                    }
+                ]
+            }
+        ]
     };
 
     return {

@@ -6,9 +6,7 @@
 </script>
 
 <div class="container">
-    <button on:click={() => handleDeleteSolution(solutionIndex)} type="button">
-        Buchungssatz löschen
-    </button>
+    <button on:click={() => handleDeleteSolution(solutionIndex)} type="button"> löschen </button>
     <label>
         <input class="SolutionInput" type="text" bind:value={solutionValues.debitAccount} />
         <input class="SolutionInput" type="text" bind:value={solutionValues.creditAccount} />
