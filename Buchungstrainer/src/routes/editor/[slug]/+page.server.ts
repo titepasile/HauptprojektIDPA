@@ -29,7 +29,7 @@ export const actions = {
             return fail(400, { editedAssignment: formAssignment, missing: true });
         }
 
-        const editedAssignment: Assignment = JSON.parse(formAssignment) as Assignment;
+        const editedAssignment: Assignment = JSON.parse(formAssignment.toString()) as Assignment;
         editedAssignment.key = params.slug;
         const result = await updateAssignment(editedAssignment);
 
