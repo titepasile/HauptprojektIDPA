@@ -23,7 +23,7 @@ export interface BookingEntryAnswer {
     date: Date;
     debitAccount: string;
     creditAccount: string;
-    amount: string;
+    amount: number;
 }
 
 export interface CorrectedBookingEntry {

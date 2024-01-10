@@ -7,6 +7,6 @@ export default async function updateAssignment(assignment: Assignment): Promise<
         throw new Error("Assignment has no key. Please use insertAssignment instead.");
     }
 
-    const assignmentInJSON = { value: JSON.stringify(assignment)};
+    const assignmentInJSON = { value: JSON.stringify(assignment) };
     await assignmentDb().update(assignmentInJSON as unknown as ObjectType, assignment.key);
 }

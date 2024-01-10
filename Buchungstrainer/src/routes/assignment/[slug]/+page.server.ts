@@ -89,7 +89,6 @@ export const actions = {
             }
 
             if (Number(solution.amount) !== Number(submittedEntry?.amount)) {
-                console.log(solution.amount + " " + submittedEntry.amount);
                 currentMistakeAmount++;
             }
 
