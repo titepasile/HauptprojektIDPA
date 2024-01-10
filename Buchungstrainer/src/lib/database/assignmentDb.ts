@@ -1,6 +1,7 @@
 import { Deta } from "deta";
 
-const deta = Deta();
-const assignmentDb = deta.Base("assignments");
-
-export default assignmentDb;
+export default function assignmentDb() {
+    const deta = Deta();
+    const assignmentDb = deta.Base("assignments");
+    return assignmentDb;
+}

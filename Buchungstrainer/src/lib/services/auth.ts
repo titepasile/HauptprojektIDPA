@@ -1,11 +1,11 @@
-import { PUBLIC_DOMAIN, PUBLIC_AUTH0_CLIENT_ID } from "$env/static/public";
+import { env } from "$env/dynamic/public";
 import { isAuthenticated, popupOpen, user } from "$lib/stores/auth";
 import { type Auth0Client, createAuth0Client, type PopupLoginOptions } from "@auth0/auth0-spa-js";
 
 async function createClient() {
     const auth0Client = await createAuth0Client({
-        domain: PUBLIC_DOMAIN || "",
-        clientId: PUBLIC_AUTH0_CLIENT_ID || ""
+        domain: env.PUBLIC_DOMAIN || "",
+        clientId: env.PUBLIC_AUTH0_CLIENT_ID || ""
     });
 
     return auth0Client;
