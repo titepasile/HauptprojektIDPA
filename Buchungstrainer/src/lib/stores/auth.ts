@@ -1,5 +1,5 @@
 import type { User } from "@auth0/auth0-spa-js";
-import { browser } from '$app/environment';
+import { browser } from "$app/environment";
 import { writable } from "svelte/store";
 
 // from here: https://rodneylab.com/using-local-storage-sveltekit/
@@ -10,15 +10,14 @@ let initialPopupOpen = false;
 if (browser) {
     const isAuthenticatedData = sessionStorage.getItem("isAuthenticated");
     initialIsAuthenticated = isAuthenticatedData ? JSON.parse(isAuthenticatedData) : false;
-  
+
     try {
         const userData = sessionStorage.getItem("user");
         initialUser = userData ? JSON.parse(userData) : undefined;
-    }
-    catch (error) {
+    } catch (error) {
         console.log(error);
     }
-  
+
     const popupOpenData = sessionStorage.getItem("popupOpen");
     initialPopupOpen = popupOpenData ? JSON.parse(popupOpenData) : false;
 }
