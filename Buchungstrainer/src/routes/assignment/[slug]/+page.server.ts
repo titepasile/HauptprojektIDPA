@@ -1,26 +1,33 @@
-import type { Task, BookingEntryAnswer, CorrectedBookingEntry } from "$interfaces";
+import type { Task, BookingEntryAnswer, CorrectedBookingEntry, Assignment } from "$interfaces";
 import type { PageServerLoad, Actions } from "./$types";
 import getAssignmentByKey from "$lib/database/getAssignmentByKey";
 
 export const load: PageServerLoad = async ({ params }) => {
-    const assignment = await getAssignmentByKey(params.slug);
-    if (!assignment) {
+    const assignmentAsString = await getAssignmentByKey(params.slug);
+    if (!assignmentAsString) {
         throw new Error("No assignment found");
     }
 
+    const testAssignment: Assignment = JSON.parse(assignmentAsString.value);
     // access control
 
     return {
-        assignment: assignment
+        assignment: testAssignment
     };
 };
 
 export const actions = {
     checkAsnwers: async ({ request, params }) => {
-        const assignment = await getAssignmentByKey(params.slug);
+        const assignmentFromDB = await getAssignmentByKey(params.slug);
+        const assignment: Assignment = JSON.parse(assignmentFromDB.value);
+
         if (!assignment) {
             throw new Error("No assignment found");
         }
+
+        assignment.tasks.forEach((task) => {
+            task.date = new Date(task.date);
+        });
 
         const assignmentTasks: Task[] = assignment.tasks;
         if (!assignmentTasks[0].solutions) {
@@ -81,7 +88,8 @@ export const actions = {
                 currentMistakeAmount++;
             }
 
-            if (solution.amount !== submittedEntry?.amount) {
+            if (Number(solution.amount) !== Number(submittedEntry?.amount)) {
+                console.log(solution.amount + " " + submittedEntry.amount);
                 currentMistakeAmount++;
             }
 
@@ -91,11 +99,9 @@ export const actions = {
                 submitedEntry: submittedEntry
             });
         });
-
-        console.log(correctionBookingEntry);
         return {
             success: true,
-            correctedBookingEntry: correctionBookingEntry
+            correctedBookingEntry: JSON.stringify(correctionBookingEntry)
         };
     }
 } satisfies Actions;
