@@ -2,6 +2,17 @@
     import type { Assignment } from "$interfaces";
     import TaskInput from "./taskInput.svelte";
     import type { PageData } from "./$types";
+    import type { User } from "@auth0/auth0-spa-js";
+    import { isAuthenticated, user } from "$lib/stores/auth";
+    import { goto } from "$app/navigation";
+    import { browser } from "$app/environment";
+
+    const myUser: User | undefined = $user;
+    const auth: boolean = $isAuthenticated;
+
+    if (!auth && browser) {
+        goto("/");
+    }
 
     // Load data from the server
     export let data: PageData;
@@ -9,8 +20,8 @@
     if (!data.assignment) {
         throw new Error("No assignment found");
     }
+
     newAssignment = data.assignment;
-    newAssignment.authorId = "id"; // Needs to be changed when login done
 
     const addNewTaskInput = () => {
         newAssignment.tasks = [
@@ -21,7 +32,6 @@
                 solutions: []
             }
         ];
-        console.log(newAssignment);
     };
 
     const deleteInput = (index: number) => {
@@ -30,15 +40,21 @@
     };
 
     const submitAssignment = async (event: { currentTarget: EventTarget & HTMLFormElement }) => {
+        newAssignment.authorId = myUser?.sub || "";
+
         const data = new FormData();
         data.append("newAssignment", JSON.stringify(newAssignment));
 
-        // ...
-        // eslint-disable-next-line
         const response = await fetch(event.currentTarget.action, {
             method: "POST",
             body: data
         });
+
+        const result = await response;
+
+        if (result.status === 200) {
+            // redirect to overviewpage
+        }
     };
 </script>
 
