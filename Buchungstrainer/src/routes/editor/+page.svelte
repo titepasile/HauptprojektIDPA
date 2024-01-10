@@ -53,13 +53,14 @@
         const result = await response;
 
         if (result.status === 200) {
-            // redirect to overviewpage
+            goto("/overview");
         }
     };
 </script>
 
 <div class="container">
     <h1>Neuer Auftrag</h1>
+    <button on:click={() => goto("/overview")}>Zurück</button>
     <form
         class="form"
         method="POST"

@@ -3,6 +3,7 @@
     import AssignmentTable from "./AssignmentTable.svelte";
     import TaskTable from "./TaskTable.svelte";
     import type { PageData } from "./$types";
+    import { goto } from "$app/navigation";
 
     // Load data from the server
     export let data: PageData;
@@ -49,6 +50,7 @@
         <div class="PartContainer">
             <div class="PartContent">
                 <h1>{assignment.title}</h1>
+                <button on:click={() => goto("/overview")}>Zurück</button>
                 <div>{assignment.description}</div>
                 <AssignmentTable tableData={assignment.tasks} />
             </div>
