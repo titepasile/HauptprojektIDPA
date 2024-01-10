@@ -2,7 +2,7 @@ import type { Assignment } from "$interfaces";
 import assignmentDb from "./assignmentDb";
 
 export default async function getAssignmentByKey(key: string): Promise<Assignment> {
-    const response = await assignmentDb.get(key);
+    const response = await assignmentDb().get(key);
 
     if (!response) {
         throw new Error("Failed to fetch assignments");
